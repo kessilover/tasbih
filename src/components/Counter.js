@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { updateCounter, resetCounter } from '../actions';
 import ButtonPlus from './ButtonPlus';
 import ButtonReset from './ButtonReset';
 import TextInput from './TextInput';
 
 
 class Counter extends Component {
-    state= { counter: 0 };
-    onPress = () => {
-        this.setState({ counter: this.state.counter + 1 });
+    onIncrementingCounter() {
+        this.props.updateCounter();
     }
 
-    onReset = () => {
-        this.setState({ counter: 0 });
+    onResetCounter() {
+        this.props.resetCounter();
     }
+
     render() {
         const { containerStyle } = styles;
         return (
             <View style={containerStyle}>
-                <ButtonReset onPress={this.onReset} />
+                <ButtonReset onPress={this.onResetCounter.bind(this)} />
                 <TextInput>
-                    {this.state.counter}
+                    {this.props.count}
                 </TextInput>
-                <ButtonPlus onPress={this.onPress}>+</ButtonPlus>                        
+                <ButtonPlus onPress={this.onIncrementingCounter.bind(this)}>+</ButtonPlus>                        
             </View>
         );
     }
@@ -36,5 +38,11 @@ const styles = StyleSheet.create({
 
     }
 });
-export default Counter;
+
+const mapStateToProps = (state) => {
+    
+    return { count: state.counter.count };
+};
+
+export default connect(mapStateToProps, { updateCounter, resetCounter })(Counter);
 
