@@ -1,6 +1,6 @@
 # A Tasbih App build with React-Native
 So far, this app has the basic functionalities of a Tasbih app. 
-Next Step will be added redux to the App.
+Adding support of redux library was done successfully.
 
 <img height =700 src="https://github.com/kessilover/tasbih/blob/master/src/assets/image.png" />
 
